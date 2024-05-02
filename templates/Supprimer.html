@@ -1,0 +1,23 @@
+<!-- On hérite du template de base -->
+{% extends "base.html" %}
+
+<!-- On ajoute notre propre contenu -->
+{% block contenu %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Supprimer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <h1>Supprimer</h1>
+    <br>
+    <form action="/supprimer2", method="POST">
+        <label>Quelle est la clé primaire de la tache que vous voulez supprimer: </label>
+        <input type="text" name="id" value="..." />
+        <input type="submit" value="Supprimer" />
+    </form>
+</body>
+</html>
+{% endblock %}
