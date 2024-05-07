@@ -9,13 +9,13 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 import socket
 
 
-# Create your objects here.
-ev3 = EV3Brick()
+
 
 class Mouvement():
     def __init__(self):
         self.left_motor = Motor(Port.A)
         self.right_motor = Motor(Port.C)
+        self.bras = Motor(Port.B)
 
     def avancer(self):
         self.left_motor.run(500)
@@ -26,17 +26,22 @@ class Mouvement():
         self.right_motor.run(-500)
 
     def gauche(self):
-        self.left_motor.run(-200)
-        self.right_motor.run(200)
+        self.left_motor.run(-100)
+        self.right_motor.run(100)
 
     def droite(self):
-        self.left_motor.run(200)
-        self.right_motor.run(-200)
+        self.left_motor.run(100)
+        self.right_motor.run(-100)
     
     def stop(self):
         self.left_motor.run(0)
         self.right_motor.run(0)
-
+    
+    def lever_bras(self):
+        self.bras.run(50)
+    
+    def lever_bras(self):
+        self.bras.run(-50)
 
 
 class Capteur():
@@ -59,48 +64,53 @@ class Capteur():
         return self.gs.angle()
 
 
-if __name__ == "__main__":
-    # Interface réseau et port TCP d'acoute
-    ADRESSE = ""
-    PORT = 1664
+class Serveur():
+    def __init__(self, port):
+        self.ADRESSE = ""
+        self.PORT = port
+        self.serveur = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.serveur.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.serveur.bind((self.ADRESSE, self.PORT))
+        self.serveur.listen(10)
+        self.moteur = Mouvement()
+        self.capteur = Capteur()
+    
+    def recevoir(self):
+        fin = False
+        while fin == False:
+            # Attente qu'un client se connecte
+            client, adresse = self.serveur.accept()
 
-    # Création d'une socket
-    serveur = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            # Réception de la requete du client sous forme de bytes et transformation en string
+            requete = client.recv(1024)
+            if requete.decode() == "AVANCER":
+                self.moteur.avancer()
+            if requete.decode() == "RECULER":
+                self.moteur.reculer()
+            if requete.decode() == "GAUCHE":
+                self.moteur.gauche()
+            if requete.decode() == "DROITE":
+                self.moteur.droite()
+            if requete.decode() == "STOP":
+                self.moteur.stop()
+            if requete.decode() == "X":
+                self.moteur.stop()
+                fin = True
 
-    # Configuration de la socket pour pouvoir la réutiliser
-    serveur.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-
-    # On demande à l'OS d'attacher notre programme au port TCP demandé
-    serveur.bind((ADRESSE, PORT))
-    serveur.listen(10)
-
-    moteur = Mouvement()
-    capteur = Capteur()
-
-    # Boucle de gestion des connexions des clients
-    fin = False
-    while fin == False:
-        # Attente qu'un client se connecte
-        client, adresse = serveur.accept()
-
-        # Réception de la requete du client sous forme de bytes et transformation en string
-        requete = client.recv(1024)
-        if requete.decode() == "AVANCER":
-            moteur.avancer()
-        if requete.decode() == "RECULER":
-            moteur.reculer()
-        if requete.decode() == "GAUCHE":
-            moteur.gauche()
-        if requete.decode() == "DROITE":
-            moteur.droite()
-        if requete.decode() == "STOP":
-            moteur.stop()
-
+            # Déconnexion avec le client
+            client.close()
             
-        # Déconnexion avec le client
-        print("Fermeture de la connexion avec le client.")
-        client.close()
+        # Arrêt du serveur 
+        serveur.close()
 
-    # Arrêt du serveur    
-    print("Arret du serveur.")
-    serveur.close()
+
+
+if __name__ == "__main__":
+    # Create your objects here.
+    ev3 = EV3Brick()
+
+    #robot = Serveur(1664)
+    #robot.recevoir()
+    robot = Mouvement()
+    while True:
+        robot.nazi()
