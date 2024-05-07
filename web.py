@@ -95,12 +95,12 @@ bdd = Bdd("bdd/nsium.sqlite")
 #     return redirect("/")
 
 
-# @app.route("/Modifier")
-# def Modifier():
-#     """Gère l'accueil des utilisateurs"""
+@app.route("/exploitation_de_donnees")
+def exploitation_de_donnees():
+    """Gère l'accueil des utilisateurs"""
     
-#     # Rendu de la vue
-#     return render_template("Modifier.html")
+    # Rendu de la vue
+    return render_template("exploitation_de_donnees.html")
 
 
 # @app.route("/Supprimer")
@@ -138,7 +138,7 @@ bdd = Bdd("bdd/nsium.sqlite")
 def tester_bdd():
     # Transmission pour affichage
     return render_template(
-        "accueil.html",
+        "acceuil.html",
     )
 
 # Lancement du serveur

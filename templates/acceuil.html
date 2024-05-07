@@ -1,0 +1,34 @@
+<!-- On hérite du template de base -->
+{% extends "base.html" %}
+
+<!-- On ajoute notre propre contenu -->
+{% block contenu %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Acceuil</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <div class="title">
+        <h1> Site d'exploitation des données NSium </h1>
+    </div>
+    <table>
+        <tr>
+            <td><img src="./img/nath.png" /></td>
+            <td><p>Information : Progr-amateur qui s'occupe des bases de données et du site web. Ils s'occupe de l'analyse de données transmises par le robot</p></td>
+        </tr>
+        <tr>
+            <td><img src="./img/gab.png" /></td>
+            <td><p>Information : Progr-amateur qui s'occupe de l'IHM du coté scientifique </p></td>
+        </tr>
+        <tr>
+            <td><img src="./img/jerem.png" /></td>
+            <td><p>Information : Progr-amateur qui s'occupe de la connexion entre les scientifiques et le robot</p></td>
+        </tr>
+       </table>
+    
+</body>
+</html>
+{% endblock %}
