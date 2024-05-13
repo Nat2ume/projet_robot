@@ -32,6 +32,13 @@ class Client():
         requete = "GAUCHE"
         self.envoie(requete)
     
+    def lever_bras(self):
+        requete = "LEVERBRAS"
+        self.envoie(requete)
+    def baisser_bras(self):
+        requete = "BAISSERBRAS"
+        self.envoie(requete)
+    
     def stop(self):
         requete = "STOP"
         self.envoie(requete)
