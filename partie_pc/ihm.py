@@ -3,11 +3,11 @@ from client import Client
 
 
 fenetre = Tk()
-client = Client("10.229.253.69", 1664)
+
 def clavier(event):
     global coords, client
     touche = event.keysym
-
+    client = Client("10.229.253.69", 1664)
     if touche == "z":
         coords = (350, 325)
         client.avancer()

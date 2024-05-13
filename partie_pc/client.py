@@ -8,13 +8,12 @@ import socket
 class Client():
     def __init__(self, ip_robot, port):
         self.HOST = ip_robot
-        self.PORT = 1664
+        self.PORT = port
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     
     def envoie(self, requete):
         self.client.connect((self.HOST, self.PORT))
         self.client.send(requete.encode())
-        self.client.close()
     
     def avancer(self):
         requete = "AVANCER"
@@ -47,5 +46,5 @@ class Client():
 
 if __name__ == "__main__":
     client = Client("10.229.253.69", 1664)
-    client.baisser_bras()
+    client.stop()
 

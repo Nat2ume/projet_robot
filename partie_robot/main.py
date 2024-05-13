@@ -106,7 +106,7 @@ class Serveur():
             client.close()
             
         # Arrêt du serveur 
-        serveur.close()
+        self.serveur.close()
 
 
 
