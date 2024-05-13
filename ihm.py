@@ -1,25 +1,34 @@
 from tkinter import * 
+from client import Client
+
 
 fenetre = Tk()
+client = Client("10.229.253.69", 1664)
 def clavier(event):
-    global coords
-
+    global coords, client
     touche = event.keysym
 
     if touche == "z":
         coords = (350, 325)
+        client.avancer()
     elif touche == "s":
         coords = (350, 475)
+        client.reculer()
     elif touche == "d":
         coords = (450, 400)
+        client.tourner_droit()
     elif touche == "q":
         coords = (250,400)
+        client.tourner_gauche()
     elif touche == "e":
         coords = (450,325)
+        client.lever_bras()
     elif touche == "a":
         coords = (250,325)
+        client.baisser_bras()
     elif touche == "space" :
         coords = (350,400)
+        client.stop()
     # changement de coordonnées pour le rectangle
     canvas.coords(rectangle, coords[0], coords[1], coords[0]+50, coords[1]+50)
 
@@ -67,4 +76,4 @@ canvas.bind("<Key>", clavier)
 # création du canvas
 canvas.pack()
 fenetre.mainloop()
-
+client.stop()
