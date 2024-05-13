@@ -5,27 +5,6 @@ NSI :: Client TCP
 # Librairie(s)
 import socket
 
-"""# Adresse IP et port TCP d'écoute du serveur
-HOST = "10.229.253.69"
-PORT = 1664
-
-# Création de la socket
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-# Connexion au serveur
-client.connect((HOST, PORT))
-print(f"Connexion vers {HOST}:{PORT} reussie.")
-
-# Envoi d'un message texte qu'il faut transformer en octets avant envoi
-requete = "AVANCER"
-print(f"Envoi de : {requete}")
-client.send(requete.encode())
-
-# Déconnexion
-print("Deconnexion.")
-client.close()
-"""
-
 class Client():
     def __init__(self, ip_robot, port):
         self.HOST = ip_robot
