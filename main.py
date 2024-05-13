@@ -40,7 +40,7 @@ class Mouvement():
     def lever_bras(self):
         self.bras.run(50)
     
-    def lever_bras(self):
+    def baisser_bras(self):
         self.bras.run(-50)
 
 
@@ -91,6 +91,10 @@ class Serveur():
                 self.moteur.gauche()
             if requete.decode() == "DROITE":
                 self.moteur.droite()
+            if requete.decode() == "LEVERBRAS":
+                self.moteur.lever_bras()
+            if requete.decode() == "BAISSERBRAS":
+                self.moteur.baisser_bras()
             if requete.decode() == "STOP":
                 self.moteur.stop()
             if requete.decode() == "X":
@@ -108,9 +112,5 @@ class Serveur():
 if __name__ == "__main__":
     # Create your objects here.
     ev3 = EV3Brick()
-
-    #robot = Serveur(1664)
-    #robot.recevoir()
-    robot = Mouvement()
-    while True:
-        robot.nazi()
+    robot = Serveur(1664)
+    robot.recevoir()
