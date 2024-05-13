@@ -35,7 +35,7 @@ class Client():
     def lever_bras(self):
         requete = "LEVERBRAS"
         self.envoie(requete)
-        
+
     def baisser_bras(self):
         requete = "BAISSERBRAS"
         self.envoie(requete)
@@ -47,5 +47,5 @@ class Client():
 
 if __name__ == "__main__":
     client = Client("10.229.253.69", 1664)
-    client.stop()
+    client.baisser_bras()
 

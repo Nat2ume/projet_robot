@@ -36,6 +36,7 @@ class Mouvement():
     def stop(self):
         self.left_motor.run(0)
         self.right_motor.run(0)
+        self.bras.run(0)
     
     def lever_bras(self):
         self.bras.run(50)
