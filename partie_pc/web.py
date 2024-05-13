@@ -15,24 +15,23 @@ app = Flask(__name__)
 bdd = Bdd("bdd/nsium.sqlite")
 
 
-# @app.route("/Ajouter")
+# @app.route("/test")
 # def Ajouter():
 #     """Gère l'accueil des utilisateurs"""
     
 #     # Rendu de la vue
-#     return render_template("Ajouter.html")
+#     return render_template("test.html")
 
-# @app.route("/ajouter2", methods=["POST"])
+# @app.route("/test2", methods=["POST"])
 # def ajouter_base_donnée():
 #     nom_tache = request.form["nom"]
-#     priorite =request.form["prio"]
-#     catego = request.form["catégorie"]
-#     etat = request.form["stade"]
-#     date = request.form["date"]
+#     date =request.form["date"]
+#     pilote = request.form["pilote"]
+#     action = request.form["action"]
 #     connexion = sqlite3.connect("bdd/todo.sqlite")
 #     curseur = connexion.cursor()
 #     curseur.execute(f"""Insert into Task (name, priority, categorie, etat, date_echeance) 
-#     Values ('{nom_tache}', '{priorite}', '{catego}', '{etat}', '{date}');""")
+#     Values ('{nom_tache}', '{date}', '{pilote}', '{action}';""")
 #     connexion.commit()
 #     connexion.close()
 #     return redirect("/")
@@ -92,6 +91,13 @@ bdd = Bdd("bdd/nsium.sqlite")
 #     connexion.close()
 #     return redirect("/")
 
+# @app.route("/Modifier")
+# def Modifier():
+#     """Gère l'accueil des utilisateurs"""
+    
+#     # Rendu de la vue
+#     return render_template("Modifier.html")
+
 # @app.route("/Supprimer")
 # def Supprimer():
 #     """Gère l'accueil des utilisateurs"""
@@ -112,23 +118,23 @@ bdd = Bdd("bdd/nsium.sqlite")
 #     return redirect("/")
 
 
-@app.route("/exploitation_de_donnees")
+@app.route("/test")
 def tester_bdd():
     # Récupération des personnes de la base de données SQLite
     Task = bdd.recuperer_task()
     print(Task)
     # Transmission pour affichage
     return render_template(
-        "exploitation_de_donnees.html",
+        "test.html",
         Task=Task
     )
 
-@app.route("/")
-def tester_bdd():
-    # Transmission pour affichage
-    return render_template(
-        "acceuil.html",
-    )
+# @app.route("/")
+# def tester_bdd():
+#     # Transmission pour affichage
+#     return render_template(
+#         "accueil.html",
+#     )
 
 # @app.route("/exploitation_de_donnees")
 # def exploitation_de_donnees():
