@@ -30,7 +30,7 @@ class Bdd:
         curseur = connexion.cursor()
         requete_sql = """
             SELECT *
-            FROM Task;"""
+            FROM Recherche;"""
         resultat = curseur.execute(requete_sql)
         task = resultat.fetchall()
         connexion.close()
@@ -45,7 +45,7 @@ class Bdd:
         connexion = sqlite3.connect(self.chemin_bdd)
         curseur = connexion.cursor()
         requete_sql = f"""
-            INSERT INTO Task
+            INSERT INTO Recherche
             VALUES ({name},{priority},{id_categorie},{id_etat},{date_echeance});"""
         resultat = curseur.execute(requete_sql)
         task = resultat.fetchall()
@@ -61,11 +61,11 @@ class Bdd:
         connexion = sqlite3.connect(self.chemin_bdd)
         curseur = connexion.cursor()
         requete_sql = f"""
-            UPDATE Task
+            UPDATE Recherche
             SET name = {name},priority = {priority},
             id_categorie = {id_categorie},id_etat = {id_etat}, 
             date_echeance = {date_echeance}))
-            WHERE id_task = {task};"""
+            WHERE id_recherche = {task};"""
         resultat = curseur.execute(requete_sql)
         task = resultat.fetchall()
         connexion.close()
@@ -80,8 +80,8 @@ class Bdd:
         connexion = sqlite3.connect(self.chemin_bdd)
         curseur = connexion.cursor()
         requete_sql = f"""
-            DELET FROM Task
-            WHERE id_task = {id_task};"""
+            DELET FROM Recherche
+            WHERE id_recherche = {id_task};"""
         resultat = curseur.execute(requete_sql)
         task = resultat.fetchall()
         connexion.close()
@@ -91,5 +91,5 @@ class Bdd:
 # Mise au point de la classe Bdd seule
 if __name__ == "__main__":
     # TODO : ajoutez le code pour tester et mettre au point votre classe Bdd
-    test = Bdd("bdd/todo.sqlite")  
+    test = Bdd("bdd/nsium.sqlite")  
     print(test.recuperer_task())

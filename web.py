@@ -59,8 +59,6 @@ bdd = Bdd("bdd/nsium.sqlite")
 #     connexion.close()
 #     return redirect("/")
 
-
-
 # @app.route("/modif_nom", methods=["POST"])
 # def modifier_base_donnée_nom():
 #     nom_tache = request.form["nom"]
@@ -94,15 +92,6 @@ bdd = Bdd("bdd/nsium.sqlite")
 #     connexion.close()
 #     return redirect("/")
 
-
-@app.route("/exploitation_de_donnees")
-def exploitation_de_donnees():
-    """Gère l'accueil des utilisateurs"""
-    
-    # Rendu de la vue
-    return render_template("exploitation_de_donnees.html")
-
-
 # @app.route("/Supprimer")
 # def Supprimer():
 #     """Gère l'accueil des utilisateurs"""
@@ -123,16 +112,16 @@ def exploitation_de_donnees():
 #     return redirect("/")
 
 
-# @app.route("/")
-# def tester_bdd():
-#     # Récupération des personnes de la base de données SQLite
-#     Task = bdd.recuperer_task()
-#     print(Task)
-#     # Transmission pour affichage
-#     return render_template(
-#         "accueil.html",
-#         Task=Task
-#     )
+@app.route("/exploitation_de_donnees")
+def tester_bdd():
+    # Récupération des personnes de la base de données SQLite
+    Task = bdd.recuperer_task()
+    print(Task)
+    # Transmission pour affichage
+    return render_template(
+        "exploitation_de_donnees.html",
+        Task=Task
+    )
 
 @app.route("/")
 def tester_bdd():
@@ -140,6 +129,13 @@ def tester_bdd():
     return render_template(
         "acceuil.html",
     )
+
+# @app.route("/exploitation_de_donnees")
+# def exploitation_de_donnees():
+#     """Gère l'accueil des utilisateurs"""
+    
+#     # Rendu de la vue
+#     return render_template("exploitation_de_donnees.html")
 
 # Lancement du serveur
 if __name__ == "__main__":
