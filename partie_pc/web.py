@@ -12,136 +12,41 @@ from sqlite3 import*
 
 # Création des objets Flask et Bdd
 app = Flask(__name__)
-bdd = Bdd("bdd/nsium.sqlite")
+bdd = Bdd("./bdd/nsium.sqlite")
 
-
-# @app.route("/test")
-# def Ajouter():
-#     """Gère l'accueil des utilisateurs"""
-    
-#     # Rendu de la vue
-#     return render_template("test.html")
-
-# @app.route("/test2", methods=["POST"])
-# def ajouter_base_donnée():
-#     nom_tache = request.form["nom"]
-#     date =request.form["date"]
-#     pilote = request.form["pilote"]
-#     action = request.form["action"]
-#     connexion = sqlite3.connect("bdd/todo.sqlite")
-#     curseur = connexion.cursor()
-#     curseur.execute(f"""Insert into Task (name, priority, categorie, etat, date_echeance) 
-#     Values ('{nom_tache}', '{date}', '{pilote}', '{action}';""")
-#     connexion.commit()
-#     connexion.close()
-#     return redirect("/")
-
-# @app.route("/modif_prio", methods=["POST"])
-# def modifier_base_donnée_prio():
-#     nom_tache = request.form["prio"]
-#     num_tache = request.form["num"]
-#     connexion = sqlite3.connect("bdd/todo.sqlite")
-#     curseur = connexion.cursor()
-#     curseur.execute(f"""Update Task SET name='{nom_tache}' WHERE id_task='{num_tache}';""")
-#     connexion.commit()
-#     connexion.close()
-#     return redirect("/")
-
-# @app.route("/modif_etat", methods=["POST"])
-# def modifier_base_donnée_etat():
-#     nom_tache = request.form["etat"]
-#     num_tache = request.form["num"]
-#     connexion = sqlite3.connect("bdd/todo.sqlite")
-#     curseur = connexion.cursor()
-#     curseur.execute(f"""Update Task SET name='{nom_tache}' WHERE id_task='{num_tache}';""")
-#     connexion.commit()
-#     connexion.close()
-#     return redirect("/")
-
-# @app.route("/modif_nom", methods=["POST"])
-# def modifier_base_donnée_nom():
-#     nom_tache = request.form["nom"]
-#     num_tache = request.form["num"]
-#     connexion = sqlite3.connect("bdd/todo.sqlite")
-#     curseur = connexion.cursor()
-#     curseur.execute(f"""Update Task SET name='{nom_tache}' WHERE id_task='{num_tache}';""")
-#     connexion.commit()
-#     connexion.close()
-#     return redirect("/")
-
-# @app.route("/modif_type", methods=["POST"])
-# def modifier_base_donnée_type():
-#     nom_tache = request.form["type"]
-#     num_tache = request.form["num"]
-#     connexion = sqlite3.connect("bdd/todo.sqlite")
-#     curseur = connexion.cursor()
-#     curseur.execute(f"""Update Task SET name='{nom_tache}' WHERE id_task='{num_tache}';""")
-#     connexion.commit()
-#     connexion.close()
-#     return redirect("/")
-
-# @app.route("/modif_date", methods=["POST"])
-# def modifier_base_donnée_date():
-#     nom_tache = request.form["date"]
-#     num_tache = request.form["num"]
-#     connexion = sqlite3.connect("bdd/todo.sqlite")
-#     curseur = connexion.cursor()
-#     curseur.execute(f"""Update Task SET name='{nom_tache}' WHERE id_task='{num_tache}';""")
-#     connexion.commit()
-#     connexion.close()
-#     return redirect("/")
-
-# @app.route("/Modifier")
-# def Modifier():
-#     """Gère l'accueil des utilisateurs"""
-    
-#     # Rendu de la vue
-#     return render_template("Modifier.html")
-
-# @app.route("/Supprimer")
-# def Supprimer():
-#     """Gère l'accueil des utilisateurs"""
-    
-#     # Rendu de la vue
-#     return render_template("Supprimer.html")
-
-# @app.route("/supprimer2", methods=["POST"])
-# def Supprimer2():
-#     """Gère l'accueil des utilisateurs"""
-#     id_task = request.form["id"]
-#     connexion = sqlite3.connect("bdd/todo.sqlite")
-#     curseur = connexion.cursor()
-#     curseur.execute(f"""Delete from Task 
-#     WHERE id_task={id_task};""")
-#     connexion.commit()
-#     connexion.close()
-#     return redirect("/")
-
-
-@app.route("/test")
-def tester_bdd():
-    # Récupération des personnes de la base de données SQLite
-    Task = bdd.recuperer_task()
-    print(Task)
+@app.route("/")
+def accueil():
     # Transmission pour affichage
     return render_template(
-        "test.html",
-        Task=Task
+        "accueil.html",
     )
 
-# @app.route("/")
-# def tester_bdd():
-#     # Transmission pour affichage
-#     return render_template(
-#         "accueil.html",
-#     )
+@app.route("/exploitation_de_donnees")
+def Nsium():
+    """Gère l'accueil des utilisateurs"""
+    Base = bdd.recuperer_task('Nsium')
+    print(Base)
+    # Transmission pour affichage
+    return render_template(
+        "exploitation_de_donnees.html",base_nsium=Base)
 
-# @app.route("/exploitation_de_donnees")
-# def exploitation_de_donnees():
-#     """Gère l'accueil des utilisateurs"""
-    
-#     # Rendu de la vue
-#     return render_template("exploitation_de_donnees.html")
+@app.route("/exploitation_de_donnees")
+def Obstacles():
+    """Gère l'accueil des utilisateurs"""
+    Base = bdd.recuperer_task('Obstacles')
+    print(Base)
+    # Transmission pour affichage
+    return render_template(
+        "exploitation_de_donnees.html",base_obstacles=Base)
+
+@app.route("/exploitation_de_donnees")
+def Recherche():
+    """Gère l'accueil des utilisateurs"""
+    Base = bdd.recuperer_task('Recherche')
+    print(Base)
+    # Transmission pour affichage
+    return render_template(
+        "exploitation_de_donnees.html",base_recherche=Base)
 
 # Lancement du serveur
 if __name__ == "__main__":

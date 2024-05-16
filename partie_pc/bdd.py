@@ -20,7 +20,7 @@ class Bdd:
         """
         self.chemin_bdd = chemin_bdd
 
-    def recuperer_task(self):
+    def recuperer_task(self,base):
         """Récupère des données
 
         Returns:
@@ -28,68 +28,16 @@ class Bdd:
         """
         connexion = sqlite3.connect(self.chemin_bdd)
         curseur = connexion.cursor()
-        requete_sql = """
+        requete_sql = f"""
             SELECT *
-            FROM Recherche;"""
+            FROM {base};"""
         resultat = curseur.execute(requete_sql)
-        task = resultat.fetchall()
+        donnee = resultat.fetchall()
         connexion.close()
-        return task
-
-    # def creer_task(self, name, priority, id_categorie, id_etat, date_echeance):
-    #     """Récupère des données
-
-    #     Returns:
-    #         liste de taches modifié 
-    #     """
-    #     connexion = sqlite3.connect(self.chemin_bdd)
-    #     curseur = connexion.cursor()
-    #     requete_sql = f"""
-    #         INSERT INTO Recherche
-    #         VALUES ({name},{priority},{id_categorie},{id_etat},{date_echeance});"""
-    #     resultat = curseur.execute(requete_sql)
-    #     task = resultat.fetchall()
-    #     connexion.close()
-    #     return task
-
-    # def update_task(self, name, priority, id_categorie, id_etat, date_echeance, task):
-    #     """Récupère des données
-
-    #     Returns:
-    #         liste de taches mise a jour
-    #     """
-    #     connexion = sqlite3.connect(self.chemin_bdd)
-    #     curseur = connexion.cursor()
-    #     requete_sql = f"""
-    #         UPDATE Recherche
-    #         SET name = {name},priority = {priority},
-    #         id_categorie = {id_categorie},id_etat = {id_etat}, 
-    #         date_echeance = {date_echeance}))
-    #         WHERE id_recherche = {task};"""
-    #     resultat = curseur.execute(requete_sql)
-    #     task = resultat.fetchall()
-    #     connexion.close()
-    #     return task
-
-    # def delete_task(self, id_task):
-    #     """Récupère des données
-
-    #     Returns:
-    #         liste de taches avec la ligne de supprimé
-    #     """
-    #     connexion = sqlite3.connect(self.chemin_bdd)
-    #     curseur = connexion.cursor()
-    #     requete_sql = f"""
-    #         DELET FROM Recherche
-    #         WHERE id_recherche = {id_task};"""
-    #     resultat = curseur.execute(requete_sql)
-    #     task = resultat.fetchall()
-    #     connexion.close()
-    #     return task
-
+        return donnee
 
 # Mise au point de la classe Bdd seule
 if __name__ == "__main__":
     # TODO : ajoutez le code pour tester et mettre au point votre classe Bdd
-    test = Bdd("bdd/nsium.sqlite")  
+    test = Bdd("./bdd/nsium.sqlite")  
     print(test.recuperer_task())
