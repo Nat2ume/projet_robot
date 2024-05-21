@@ -16,7 +16,7 @@ def accueil():
     )
 
 @app.route("/exploitation_de_donnees")
-def Obstacles():
+def exploitation():
     """Gère l'accueil des utilisateurs"""
     Base1 = bdd.recuperer_task('Nsium')
     print(Base1)
@@ -27,6 +27,13 @@ def Obstacles():
     # Transmission pour affichage
     return render_template(
         "exploitation_de_donnees.html",base_nsium=Base1, base_obstacles=Base2,base_recherche=Base3)
+
+@app.route("/exploitation")
+def demande_exploitation():
+    # Transmission pour affichage
+    return render_template(
+        "exploitation.html",
+    )
 
 # Lancement du serveur
 if __name__ == "__main__":
