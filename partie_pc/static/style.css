@@ -4,9 +4,14 @@ h1{
 }
 
 table {
-    table-layout:fixed;
+    table-layout: fixed;
     width: 100%;
-    border-collapse:separate;
+    border-collapse: collapse;
+  }
+  
+  th,
+  td {
+    padding: 10px;
   }
   
 

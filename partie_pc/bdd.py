@@ -40,4 +40,4 @@ class Bdd:
 if __name__ == "__main__":
     # TODO : ajoutez le code pour tester et mettre au point votre classe Bdd
     test = Bdd("./bdd/nsium.sqlite")  
-    print(test.recuperer_task())
+    print(test.recuperer_task('Nsium'))
