@@ -5,20 +5,24 @@ from client import Client
 fenetre = Tk()
 
 def clavier(event):
-    global coords, client
+    global coords, client, robot, coords2
     touche = event.keysym
     client = Client("10.229.253.69", 1664)
     if touche == "z":
         coords = (350, 325)
+        coords2 = (coords2[0], coords2[1]-1)
         client.avancer()
     elif touche == "s":
         coords = (350, 475)
+        coords2 = (coords2[0], coords2[1]+1)
         client.reculer()
     elif touche == "d":
         coords = (450, 400)
+        coords2 = (coords2[0]+1, coords2[1])
         client.tourner_droit()
     elif touche == "q":
         coords = (250,400)
+        coords2 = (coords2[0]-1, coords2[1])
         client.tourner_gauche()
     elif touche == "e":
         coords = (450,325)
@@ -31,10 +35,12 @@ def clavier(event):
         client.stop()
     # changement de coordonnées pour le rectangle
     canvas.coords(rectangle, coords[0], coords[1], coords[0]+50, coords[1]+50)
+    coords = coords2
+    canvas.coords(robot,coords[0], coords[1], coords[0]+30, coords[1]+30 )
 
 # création du canvas
 
-canvas = Canvas(fenetre, width=700, height=850, bg="ivory",background="oldlace")
+canvas = Canvas(fenetre, width=1500, height=850, bg="ivory",background="oldlace")
 
 rectangle0 = canvas.create_rectangle(350,400,400,450)
 txt = canvas.create_text(375, 425, text="Space", font="Arial 12 italic", fill="indigo")
@@ -63,9 +69,16 @@ txt = canvas.create_text(275, 310, text="Baisser le bras", font="Arial 12 italic
 txt = canvas.create_text(275, 350, text="A", font="Arial 16 italic", fill="indigo")
 rectangle6 = canvas.create_rectangle(250,325,300,375,)
 
+coords2 = (1060,435)
+carte  = canvas.create_rectangle(700,100,1450,800,fill="white")
+robot = canvas.create_oval(1060,435,1090,465,fill="cyan")
+ligne2 = canvas.create_line(1075,450,1075,300,fill="cyan",width=2)
 
 txt = canvas.create_text(350, 100, text="Manette de controle du robot", font="Arial 38 italic", fill="indigo")
 ligne = canvas.create_line(20,130,680,130,fill="indigo",width=5) 
+
+
+
 # coordonnées initiales
 coords = (350, 400)
 # création du rectangle
