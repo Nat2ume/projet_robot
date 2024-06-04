@@ -19,11 +19,8 @@ def accueil():
 def exploitation():
     """Gère l'accueil des utilisateurs"""
     Base1 = bdd.recuperer_task('Nsium')
-    print(Base1)
     Base2 = bdd.recuperer_task('Obstacles')
-    print(Base2)
     Base3 = bdd.recuperer_task('Recherche')
-    print(Base3)
     # Transmission pour affichage
     return render_template(
         "exploitation_de_donnees.html",base_nsium=Base1, base_obstacles=Base2,base_recherche=Base3)
@@ -34,6 +31,16 @@ def demande_exploitation():
     return render_template(
         "exploitation.html",
     )
+@app.route("/exploitation", methods=["POST"])
+def demande_bdd():
+    base_donnee = request.form["bdd"]
+    nom = request.form["nom"]
+    pilote = request.form["pilote"]
+    date = request.form["date"]
+    Base = bdd.recuperer_task(base_donnee,nom,date,pilote)
+    # Transmission pour affichage
+    return render_template(
+        "exploitation_de_donnees.html",base = Base)
 
 # Lancement du serveur
 if __name__ == "__main__":

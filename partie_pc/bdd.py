@@ -35,6 +35,21 @@ class Bdd:
         donnee = resultat.fetchall()
         connexion.close()
         return donnee
+    
+    def recuperer_task_demande(self,base,nom,date,pilote):
+        """Récupère des données
+
+        Returns:
+            (list of tuples) : liste des taches
+        """
+        connexion = sqlite3.connect(self.chemin_bdd)
+        curseur = connexion.cursor()
+        requete_sql = f"""
+            SELECT * FROM '{base}' WHERE '{base}'.Nom = '{nom}' or '{base}'.Date = '{date}' or '{base}'.Pilote = '{pilote}';"""
+        resultat = curseur.execute(requete_sql)
+        donnee = resultat.fetchall()
+        connexion.close()
+        return donnee
 
 # Mise au point de la classe Bdd seule
 if __name__ == "__main__":
