@@ -44,3 +44,41 @@ class Serveur():
             
         # Arrêt du serveur 
         self.serveur.close()
+    
+
+    def recevoir_test(self):
+        fin = False
+        while fin == False:
+            # Attente qu'un client se connecte
+            client, adresse = self.serveur.accept()
+
+            # Réception de la requete du client sous forme de bytes et transformation en string
+            requete = client.recv(1024)
+            if requete.decode() == "AVANCER":
+                print("avancer")
+            if requete.decode() == "RECULER":
+                print("reculer")
+            if requete.decode() == "GAUCHE":
+                print("g")
+            if requete.decode() == "DROITE":
+                print("d")
+            if requete.decode() == "LEVERBRAS":
+                print("lb")
+            if requete.decode() == "BAISSERBRAS":
+                print("bb")
+            if requete.decode() == "STOP":
+                print("s")
+            if requete.decode() == "X":
+                print("x")
+                fin = True
+
+            # Déconnexion avec le client
+            client.close()
+            
+        # Arrêt du serveur 
+        self.serveur.close()
+
+
+if __name__ == "__main__":
+    s = Serveur(1664)
+    s.recevoir_test()
