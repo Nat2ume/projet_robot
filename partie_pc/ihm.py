@@ -7,7 +7,7 @@ fenetre = Tk()
 def clavier(event):
     global coords, client, robot, coords2
     touche = event.keysym
-    client = Client("10.229.253.69", 1664)
+    client = Client("10.229.253.50", 1664)
     if touche == "z":
         coords = (350, 325)
         coords2 = (coords2[0], coords2[1]-1)
